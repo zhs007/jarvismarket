@@ -23,9 +23,9 @@ func startServ() {
 	jarviscore.InitJarvisCore(cfg)
 	defer jarviscore.ReleaseJarvisCore()
 
-	err = jarvismarket.Init("./cfg/config.yaml")
+	market, err := jarvismarket.NewMarket("./cfg/config.yaml")
 	if err != nil {
-		fmt.Printf("jarvismarket.Init %v", err)
+		fmt.Printf("jarvismarket.NewMarket %v", err)
 
 		return
 	}
@@ -42,7 +42,7 @@ func startServ() {
 
 	node.SetNodeTypeInfo(jarvismarketbasedef.JARVISNODETYPE, jarvismarketbasedef.VERSION)
 
-	// go dtd.Start(context.Background(), node)
+	go market.Start(context.Background())
 	node.Start(context.Background())
 
 	fmt.Printf("jarvismarket end.\n")
