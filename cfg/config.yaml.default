@@ -1,0 +1,8 @@
+# jarvis market config
+
+grpcaddr: 127.0.0.1:7770
+
+httpaddr: 127.0.0.1:7771
+
+repositories:
+  - https://github.com/zhs007/jarvismarkethub.git
