@@ -6,6 +6,7 @@ import (
 
 	"github.com/zhs007/jarviscore"
 	jarvismarketbasedef "github.com/zhs007/jarvismarket/basedef"
+	"github.com/zhs007/jarvismarket/jarvismarket"
 )
 
 func startServ() {
@@ -22,12 +23,12 @@ func startServ() {
 	jarviscore.InitJarvisCore(cfg)
 	defer jarviscore.ReleaseJarvisCore()
 
-	// dtd, err := dtdata.NewDTData("./cfg/config.yaml")
-	// if err != nil {
-	// 	fmt.Printf("NewDTData %v", err)
+	err = jarvismarket.Init("./cfg/config.yaml")
+	if err != nil {
+		fmt.Printf("jarvismarket.Init %v", err)
 
-	// 	return
-	// }
+		return
+	}
 
 	// pprof
 	jarviscore.InitPprof(cfg)

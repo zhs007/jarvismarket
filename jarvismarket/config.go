@@ -7,11 +7,20 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+// RepositoryConfig -
+type RepositoryConfig struct {
+	Name string
+	URL  string
+}
+
 // Config - config
 type Config struct {
-	GRPCAddr     string
-	HTTPAddr     string
-	Repositories []string
+	GRPCAddr           string
+	HTTPAddr           string
+	RepositoryRootPath string
+	Repositories       []RepositoryConfig
+	OnInitRepository   string
+	OnUpdRepository    string
 }
 
 // LoadConfig - load config
@@ -54,6 +63,18 @@ func checkConfig(cfg *Config) error {
 
 	if len(cfg.Repositories) <= 0 {
 		return ErrNoRepositories
+	}
+
+	if cfg.RepositoryRootPath == "" {
+		return ErrNoRepositoriyRootPath
+	}
+
+	if cfg.OnInitRepository == "" {
+		return ErrNoOnInitRepository
+	}
+
+	if cfg.OnUpdRepository == "" {
+		return ErrNoOnUpdRepository
 	}
 
 	return nil

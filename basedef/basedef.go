@@ -4,4 +4,4 @@ package jarvismarketbasedef
 const JARVISNODETYPE = "jarvis.market"
 
 // VERSION - version
-const VERSION = "0.1.3"
+const VERSION = "0.1.7"

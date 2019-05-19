@@ -1,0 +1,18 @@
+syntax = "proto3";
+package jarvismarket;
+
+enum AppType {
+    APPTYPE_NORMAL = 0;
+    APPTYPE_SERVICE = 1;
+}
+
+message AppInfo {
+    string name = 1;
+    string author = 2;
+    string authorEmail = 3;
+    string description = 4;
+    repeated string keywords = 5;
+    string version = 6;
+    bool inDocker = 7;
+    AppType type = 8;
+}

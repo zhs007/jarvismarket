@@ -4,5 +4,19 @@ grpcaddr: 127.0.0.1:7770
 
 httpaddr: 127.0.0.1:7771
 
+repositoryrootpath: ./data
+
 repositories:
-  - https://github.com/zhs007/jarvismarkethub.git
+  - 
+    name: jarvismarkethub
+    url: https://github.com/zhs007/jarvismarkethub.git
+
+# oninitrepository - This script will run when the repository is initialized.
+oninitrepository: |
+  cd {.RepositoryRootPath}
+  git clone {.RepositoryURL} {.RepositoryName}
+
+# onupdrepository - This script will be executed when the repository is updated.
+onupdrepository: |
+  cd {.RepositoryPath}
+  git pull

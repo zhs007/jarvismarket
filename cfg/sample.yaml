@@ -1,0 +1,46 @@
+# jarvis app
+
+author: zhs007
+authoremail: zerrozhao@gmail.com
+
+name: shadowsocks
+description: I can help you install shadowsocks.
+keywords:
+  - ss
+  - shadowsocks
+
+version: 0.0.1
+
+type: service
+
+docker: true
+
+dockername: shadowsocks
+
+# There are some variables that can be used in this app.
+#   - AppPath: In which directory this app will run
+#   - JarvisAppRootPath: The root directory of the Jarvis app
+#   - JarvisNodeType: Jarvis node type
+#   - JarvisNodeVersion: Jarvis node version
+#   - JarvisCoreVersion: Jarvis core version
+#   - AppVersion: app version
+#   - DockerName: docker name
+#   - Config: 
+
+# In the following configuration items, 
+#   the first letter of the name field needs to be capitalized.
+config:
+  - {name: Port, type: int, default: '3824'}
+  - {name: Password, type: password, generatepassword: 16}
+
+# onstart - This is the script that is executed at startup
+onstart: |
+  docker run -dt \
+    --name {.DockerName} \
+    -p {.Config.Port}:{.Config.Port} \
+    mritd/shadowsocks -s "-s 0.0.0.0 -p {.Config.Port} -m aes-256-cfb -k {.Config.Password} --fast-open"
+
+# onstop - This is the script that is executed when the service is stopped.
+onstop: |
+  docker stop {.DockerName}
+  docker rm {.DockerName}
