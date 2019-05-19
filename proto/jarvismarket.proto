@@ -1,9 +1,10 @@
 syntax = "proto3";
-package jarvismarket;
+package jarvismarketpb;
 
 enum AppType {
-    APPTYPE_NORMAL = 0;
-    APPTYPE_SERVICE = 1;
+    APPTYPE_UNKNOW = 0;
+    APPTYPE_NORMAL = 1;
+    APPTYPE_SERVICE = 2;
 }
 
 message AppInfo {
@@ -15,4 +16,10 @@ message AppInfo {
     string version = 6;
     bool inDocker = 7;
     AppType type = 8;
+}
+
+message RepositoryInfo {
+    string name = 1;
+
+    repeated AppInfo apps = 100;
 }
